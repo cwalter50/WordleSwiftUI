@@ -7,10 +7,32 @@
 
 import SwiftUI
 
+
+
 struct ContentView: View {
+    
+    var letters = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+
+            VStack {
+                Text("WORDLE")
+                    .padding()
+                    .font(.largeTitle)
+                GuessRow(guess: "     ")
+                GuessRow(guess: "     ")
+                GuessRow(guess: "     ")
+                GuessRow(guess: "     ")
+                GuessRow(guess: "     ")
+                GuessRow(guess: "     ")
+                HStack(alignment: .center, spacing: 1) {
+                    ForEach(letters, id: \.self) {
+                        letter in
+                        LetterButton(symbol: letter)
+                    }
+                    
+                }
+            }
+        
     }
 }
 
