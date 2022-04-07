@@ -18,6 +18,7 @@ struct GuessRow: View {
             GuessLabel(letter: guess[3])
             GuessLabel(letter: guess[4])
         }
+        .frame(minWidth: 0, maxWidth: .infinity)
     }
 }
 

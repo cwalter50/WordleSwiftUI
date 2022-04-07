@@ -7,26 +7,36 @@
 
 import SwiftUI
 
+
 struct LetterButton: View {
     @State var symbol: String = "A"
+    
+    
     var body: some View {
-        Button(action: {
-            
-        }){
-            Text(symbol)
-                .padding(10)
-                .background(Color.white)
-                .foregroundColor(.black)
+
+        ZStack {
+            RoundedRectangle(cornerRadius: 5, style: .circular)
+                .stroke(Color.gray, lineWidth: 3)
+                .aspectRatio(0.67, contentMode: .fit)
                 .border(Color.secondary, width: 2)
-                .cornerRadius(5)
+                .background(Color.white)
+            Text(symbol)
+                .foregroundColor(.black)
+
                 .font(.body)
-                
+                .minimumScaleFactor(0.5)
+                .scaledToFit()
+            
         }
+        
+            
+        
+        
     }
 }
 
 struct LetterButton_Previews: PreviewProvider {
     static var previews: some View {
-        LetterButton()
+        LetterButton(guessPosition: GuessPosition())
     }
 }

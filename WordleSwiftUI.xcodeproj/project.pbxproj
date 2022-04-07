@@ -18,6 +18,7 @@
 		38171BEC27FE149C003EE384 /* WordList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38171BEB27FE149C003EE384 /* WordList.swift */; };
 		38171BEE27FE14DE003EE384 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38171BED27FE14DE003EE384 /* Extensions.swift */; };
 		38171BF027FE165E003EE384 /* LetterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38171BEF27FE165E003EE384 /* LetterButton.swift */; };
+		83F9A45D27FE7F03005E0BF0 /* GuessPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9A45C27FE7F03005E0BF0 /* GuessPosition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		38171BEB27FE149C003EE384 /* WordList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordList.swift; sourceTree = "<group>"; };
 		38171BED27FE14DE003EE384 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		38171BEF27FE165E003EE384 /* LetterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButton.swift; sourceTree = "<group>"; };
+		83F9A45C27FE7F03005E0BF0 /* GuessPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessPosition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				38171BD327FE04FB003EE384 /* AppDelegate.swift */,
 				38171BD527FE04FB003EE384 /* SceneDelegate.swift */,
 				38171BD727FE04FB003EE384 /* ContentView.swift */,
+				83F9A45C27FE7F03005E0BF0 /* GuessPosition.swift */,
 				38171BEF27FE165E003EE384 /* LetterButton.swift */,
 				38171BE727FE1011003EE384 /* GuessLabel.swift */,
 				38171BE927FE101C003EE384 /* GuessRow.swift */,
@@ -168,6 +171,7 @@
 				38171BD827FE04FB003EE384 /* ContentView.swift in Sources */,
 				38171BEC27FE149C003EE384 /* WordList.swift in Sources */,
 				38171BEE27FE14DE003EE384 /* Extensions.swift in Sources */,
+				83F9A45D27FE7F03005E0BF0 /* GuessPosition.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,11 +11,18 @@ struct GuessLabel: View {
     
     @State var letter: String = "A"
     var body: some View {
-        Text(letter.uppercased())
-            .font(.largeTitle)
-            .padding(10)
-            .border(Color.secondary, width: 2)
-            .cornerRadius(5)
+        
+        ZStack {
+            RoundedRectangle(cornerRadius: 5, style: .circular)
+                .stroke(Color.gray, lineWidth: 3)
+                .aspectRatio(1, contentMode: .fit)
+                .border(Color.secondary, width: 2)
+                .background(Color.white)
+            Text(letter.uppercased())
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+        }
+
         
     }
 }
