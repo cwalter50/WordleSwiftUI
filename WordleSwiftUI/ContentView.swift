@@ -21,6 +21,8 @@ struct ContentView: View {
     
     @State var color = Color.gray
     
+    @State var colorDictionary: [String: Color] = ["A": Color.gray, "B": Color.gray, "C": Color.gray, "D": Color.gray,"E": Color.gray, "F": Color.gray,"G": Color.gray, "H": Color.gray,"I": Color.gray, "J": Color.gray,"K": Color.gray, "L": Color.gray,"M": Color.gray, "N": Color.gray,"O": Color.gray, "P": Color.gray,"Q": Color.gray, "R": Color.gray, "S": Color.gray, "T": Color.gray,"U": Color.gray, "V": Color.gray,"W": Color.gray, "X": Color.gray,"Y": Color.gray, "Z": Color.gray]
+    
     var letterRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     var letterRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
     var letterRow3 = ["Z", "X", "C", "V", "B", "N", "M"]
@@ -42,7 +44,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
+                            LetterButton(symbol: letter, theColor: $color, colorDictionary: $colorDictionary)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                     }
@@ -54,7 +56,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
+                            LetterButton(symbol: letter, theColor: $color, colorDictionary: $colorDictionary)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                     }
@@ -64,7 +66,7 @@ struct ContentView: View {
                     Button(action: {
                         guessWord()
                     }) {
-                        LetterButton(symbol: "ENTER", theColor: .constant(Color.gray))
+                        LetterButton(symbol: "ENTER", theColor: .constant(Color.gray), colorDictionary: $colorDictionary)
 
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -75,7 +77,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
+                            LetterButton(symbol: letter, theColor: $color, colorDictionary: $colorDictionary)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                             
@@ -83,7 +85,7 @@ struct ContentView: View {
                     Button(action: {
                         removeLetter()
                     }) {
-                        LetterButton(symbol: "DELETE", theColor: .constant(Color.gray))
+                        LetterButton(symbol: "DELETE", theColor: .constant(Color.gray), colorDictionary: $colorDictionary)
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                     
