@@ -14,8 +14,12 @@ struct ContentView: View {
     @State var guessPosition = GuessPosition()
     @State var guesses: [String] = ["","","","","",""]
     
+    @State var answer = "ABOVE"
+    
     @State private var showErrorAlert = false
     @State private var errorMessage = ""
+    
+    @State var color = Color.gray
     
     var letterRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     var letterRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
@@ -38,7 +42,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter)
+                            LetterButton(symbol: letter, theColor: $color)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                     }
@@ -50,7 +54,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter)
+                            LetterButton(symbol: letter, theColor: $color)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                     }
@@ -60,7 +64,7 @@ struct ContentView: View {
                     Button(action: {
                         guessWord()
                     }) {
-                        LetterButton(symbol: "ENTER")
+                        LetterButton(symbol: "ENTER", theColor: .constant(Color.gray))
 
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
@@ -71,7 +75,7 @@ struct ContentView: View {
                         Button (action: {
                             guessLetter(letter: letter)
                         }, label: {
-                            LetterButton(symbol: letter)
+                            LetterButton(symbol: letter, theColor: $color)
                                 .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
                         })
                             
@@ -79,7 +83,7 @@ struct ContentView: View {
                     Button(action: {
                         removeLetter()
                     }) {
-                        LetterButton(symbol: "DELETE")
+                        LetterButton(symbol: "DELETE", theColor: .constant(Color.gray))
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
                     
@@ -95,7 +99,15 @@ struct ContentView: View {
             .alert(isPresented: $showErrorAlert) {
                 Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .cancel())
             }
+            .onAppear(perform: getRandomWord)
         
+    }
+    
+    func getRandomWord()
+    {
+        if let word = WordList.wordleWords.randomElement() {
+            answer = word.uppercased()
+        }
     }
     
     
@@ -128,6 +140,17 @@ struct ContentView: View {
         }
         else {
             // highlight the colors of the word in the keyboard and guess
+            // loop through letters in word one character at a time
+            for i in 0..<word.count {
+                if guesses[guessPosition.guessRow][i] == answer[i]
+                {
+                    
+                }
+            }
+//            if answer.uppercased() == word.uppercased()
+            
+            
+            
         }
     }
     

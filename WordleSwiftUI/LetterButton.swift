@@ -10,7 +10,8 @@ import SwiftUI
 
 struct LetterButton: View {
     @State var symbol: String = "A"
-    
+
+    @Binding var theColor: Color
     
     var body: some View {
 
@@ -19,9 +20,9 @@ struct LetterButton: View {
                 .stroke(Color.gray, lineWidth: 3)
 //                .aspectRatio(0.67, contentMode: .fit)
                 .border(Color.secondary, width: 2)
-                .background(Color.white)
+                .background(theColor)
             Text(symbol)
-                .foregroundColor(.black)
+                .foregroundColor(.white)
 
                 .font(.body)
                 .minimumScaleFactor(0.5)
@@ -37,6 +38,9 @@ struct LetterButton: View {
 
 struct LetterButton_Previews: PreviewProvider {
     static var previews: some View {
-        LetterButton()
+//        LetterButton(theColor: .constant(Color.green))
+        LetterButton(theColor: .constant(Color.yellow))
+//        LetterButton(backgroundColor: .constant(Color.green))
+//            .previewLayout(.sizeThatFits)
     }
 }

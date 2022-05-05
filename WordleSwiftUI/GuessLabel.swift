@@ -10,6 +10,9 @@ import SwiftUI
 struct GuessLabel: View {
     
     @State var letter: String = "A"
+    
+//    @Binding var backgroundColor: Color
+    
     var body: some View {
         
         ZStack {
