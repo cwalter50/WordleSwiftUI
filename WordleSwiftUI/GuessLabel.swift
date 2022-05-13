@@ -25,13 +25,12 @@ struct GuessLabel: View {
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
         }
-
-        
     }
 }
 
 struct GuessLabel_Previews: PreviewProvider {
     static var previews: some View {
+//        GuessLabel(backgroundColor: .constant(Color.green))
         GuessLabel()
     }
 }

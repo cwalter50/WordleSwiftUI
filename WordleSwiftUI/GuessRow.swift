@@ -10,6 +10,7 @@ import SwiftUI
 struct GuessRow: View {
     
     @State var guess: String = "BOATS"
+    @EnvironmentObject var letterColors: LetterColors
     var body: some View {
         HStack(alignment: .center, spacing: 10) {
             GuessLabel(letter: guess[0])

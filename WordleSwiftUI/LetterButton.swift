@@ -11,7 +11,9 @@ import SwiftUI
 struct LetterButton: View {
     @State var symbol: String = "A"
     @Binding var theColor: Color
-    @Binding var colorDictionary : [String: Color]
+//    @Binding var colorDictionary : [String: Color]
+    
+    @EnvironmentObject var letterColors: LetterColors
     
 
     
@@ -22,7 +24,7 @@ struct LetterButton: View {
                 .stroke(Color.gray, lineWidth: 3)
 //                .aspectRatio(0.67, contentMode: .fit)
                 .border(Color.secondary, width: 2)
-                .background(colorDictionary[symbol] ?? Color.gray)
+                .background(letterColors.colorDictionary[symbol] ?? Color.gray)
             Text(symbol)
                 .foregroundColor(.white)
 
@@ -40,10 +42,8 @@ struct LetterButton: View {
 
 struct LetterButton_Previews: PreviewProvider {
     static var previews: some View {
-        let theColorDictionary: [String: Color] = ["A": Color.gray, "B": Color.gray, "C": Color.gray, "D": Color.gray,"E": Color.gray, "F": Color.gray,"G": Color.gray, "H": Color.gray,"I": Color.gray, "J": Color.gray,"K": Color.gray, "L": Color.gray,"M": Color.gray, "N": Color.gray,"O": Color.gray, "P": Color.gray,"Q": Color.gray, "R": Color.gray, "S": Color.gray, "T": Color.gray,"U": Color.gray, "V": Color.gray,"W": Color.gray, "X": Color.gray,"Y": Color.gray, "Z": Color.gray]
-//        LetterButton(theColor: .constant(Color.green))
-        LetterButton(theColor: .constant(Color.green), colorDictionary: .constant(theColorDictionary))
-//        LetterButton(backgroundColor: .constant(Color.green))
-//            .previewLayout(.sizeThatFits)
+
+        LetterButton(theColor: .constant(Color.green))
+            .environmentObject(dev.letterColors)
     }
 }
