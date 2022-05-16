@@ -106,7 +106,6 @@ struct ContentView: View {
         if let word = WordList.wordleWords.randomElement() {
             answer = word.uppercased()
             answer = "BREAD"
-            var num = 5, a = 2
             
         }
     }
@@ -142,13 +141,35 @@ struct ContentView: View {
         else {
             // highlight the colors of the word in the keyboard and guess
             // loop through letters in word one character at a time
+            // Highlight Green First
             for i in 0..<word.count {
+                let guessletter = guesses[guessPosition.guessRow][i]
                 if guesses[guessPosition.guessRow][i] == answer[i]
                 {
-                    letterColors.colorDictionary[answer[i]] = Color.green
+                    letterColors.colorDictionary[guessletter] = Color.theme.green
                 }
             }
-//            if answer.uppercased() == word.uppercased()
+            
+            // Highlight yellow
+            for i in 0..<word.count {
+                let guessletter = guesses[guessPosition.guessRow][i]
+                if answer.contains(guessletter) && letterColors.colorDictionary[answer[i]] == Color.theme.gray
+                {
+                    letterColors.colorDictionary[guessletter] = Color.theme.yellow
+                }
+            }
+            
+            // Highlight darkGray
+            for i in 0..<word.count {
+                let guessletter = guesses[guessPosition.guessRow][i]
+                if !answer.contains(guessletter)
+                {
+                    letterColors.colorDictionary[guessletter] = Color.theme.darkGray
+                }
+            }
+            
+            
+
             
             
             
