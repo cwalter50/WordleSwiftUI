@@ -12,6 +12,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var guessPosition = GuessPosition()
+//    @State var guesses: [Guess] = [Guess(),Guess(),Guess(),Guess(),Guess(),Guess()]
     @State var guesses: [String] = ["","","","","",""]
     
     @State var answer = "BREAD"
@@ -19,9 +20,10 @@ struct ContentView: View {
     @State private var showErrorAlert = false
     @State private var errorMessage = ""
     
-    @State var color = Color.gray
+    @State var color = Color.theme.gray
     
     @StateObject var letterColors = LetterColors()
+    
     
     var letterRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
     var letterRow2 = ["A", "S", "D", "F", "G", "H", "J", "K", "L"]
@@ -70,7 +72,7 @@ struct ContentView: View {
 
                     }
                     .frame(minWidth: 0, maxWidth: .infinity)
-                    .disabled(guesses[guessPosition.guessRow].count == 5 ? false: true)
+//                    .disabled(guesses[guessPosition.guessRow].count == 5 ? false: true)
                     
                     ForEach(letterRow3, id: \.self) {
                         letter in
@@ -134,7 +136,12 @@ struct ContentView: View {
     {
         let word = guesses[guessPosition.guessRow]
         
-        if !WordList.allPossibleWords.contains(word.lowercased()) {
+        print("guessing word \(word)")
+        if word.count < 5 {
+            errorMessage = "Word must contain 5 exactly letters"
+            showErrorAlert = true
+        }
+        else if !WordList.allPossibleWords.contains(word.lowercased()) {
             errorMessage = "Not a valid word"
             showErrorAlert = true
         }
@@ -143,8 +150,8 @@ struct ContentView: View {
             // loop through letters in word one character at a time
             // Highlight Green First
             for i in 0..<word.count {
-                let guessletter = guesses[guessPosition.guessRow][i]
-                if guesses[guessPosition.guessRow][i] == answer[i]
+                let guessletter = word[i]
+                if word[i] == answer[i]
                 {
                     letterColors.colorDictionary[guessletter] = Color.theme.green
                 }
@@ -152,7 +159,7 @@ struct ContentView: View {
             
             // Highlight yellow
             for i in 0..<word.count {
-                let guessletter = guesses[guessPosition.guessRow][i]
+                let guessletter = word[i]
                 if answer.contains(guessletter) && letterColors.colorDictionary[answer[i]] == Color.theme.gray
                 {
                     letterColors.colorDictionary[guessletter] = Color.theme.yellow
@@ -161,17 +168,18 @@ struct ContentView: View {
             
             // Highlight darkGray
             for i in 0..<word.count {
-                let guessletter = guesses[guessPosition.guessRow][i]
+                let guessletter = word[i]
                 if !answer.contains(guessletter)
                 {
                     letterColors.colorDictionary[guessletter] = Color.theme.darkGray
                 }
             }
             
-            
-
-            
-            
+            // your have made a guess and keyboard is the correct colors, now change the guessLabels to the correct colors.
+//            guesses[guessPosition.guessRow].word = word
+//            guesses[guessPosition.guessRow].isComplete = true
+            // move to next row
+            guessPosition.add1Word()
             
         }
     }
