@@ -10,6 +10,7 @@ import SwiftUI
 struct GuessRow: View {
     
     @State var guess: String = "BOATS"
+//    @Binding var guess: String
 //    @Binding var guess: Guess
     @EnvironmentObject var letterColors: LetterColors
     
@@ -17,6 +18,7 @@ struct GuessRow: View {
     @State var frontDegree: Double = -90
     @State var durationAndDelay: Double = 0.3
     @State var isGuessComplete: Bool = false
+//    @Binding var isGuessComplete: Bool
     
     var body: some View {
         VStack {
@@ -39,6 +41,7 @@ struct GuessRow: View {
     }
     
     func flipCard () {
+//        guess.isComplete = !guess.isComplete
         isGuessComplete = !isGuessComplete
         if isGuessComplete {
             withAnimation(.linear(duration: durationAndDelay)) {
@@ -60,8 +63,15 @@ struct GuessRow: View {
 
 struct GuessRow_Previews: PreviewProvider {
     static var previews: some View {
-//        GuessRow(guess: .constant(Guess(word: "BOATS", isComplete: false)))
-        GuessRow()
+        GuessRow(guess: "BOATS")
+//        GuessRow(guess: .constant("BOATS"))
+//        GuessRow(guess: .constant("BOATS"), isGuessComplete: .constant(false))
             .environmentObject(dev.letterColors)
+        
+//        GuessRow()
+//            .environmentObject(dev.letterColors)
+        
+//        GuessRow(guess: .constant(Guess(word: "BOATS", isComplete: false)))
+//            .environmentObject(dev.letterColors)
     }
 }

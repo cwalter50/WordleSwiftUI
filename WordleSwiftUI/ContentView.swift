@@ -12,8 +12,12 @@ import SwiftUI
 struct ContentView: View {
     
     @State var guessPosition = GuessPosition()
-//    @State var guesses: [Guess] = [Guess(),Guess(),Guess(),Guess(),Guess(),Guess()]
     @State var guesses: [String] = ["","","","","",""]
+    @State var guessesComplete: [Bool] = [false, false, false, false, false, false]
+    
+//    @State var guesses: [Guess] = [Guess(), Guess(), Guess(),Guess(), Guess(), Guess()]
+    
+//    @State var guessList = GuessList() // this has 6 guesses in it that are all not completed and starting as ""
     
     @State var answer = "BREAD"
     
@@ -37,7 +41,10 @@ struct ContentView: View {
                 ForEach(guesses, id: \.self) {
                     guess in
                     GuessRow(guess: guess)
+                    
                 }
+
+
 
                 HStack(alignment: .center, spacing: 5) {
                     ForEach(letterRow1, id: \.self) {
@@ -120,6 +127,11 @@ struct ContentView: View {
             guesses[guessPosition.guessRow] += letter
             guessPosition.add1Letter()
         }
+//        if guesses[guessPosition.guessRow].word.count < 5
+//        {
+//            guesses[guessPosition.guessRow].word += letter
+//            guessPosition.add1Letter()
+//        }
         
     }
     
@@ -129,13 +141,16 @@ struct ContentView: View {
             guesses[guessPosition.guessRow].removeLast()
             guessPosition.remove1Letter()
         }
+//        if guesses[guessPosition.guessRow].word.count > 0 {
+//            guesses[guessPosition.guessRow].word.removeLast()
+//            guessPosition.remove1Letter()
+//        }
 
     }
     
     func guessWord()
     {
         let word = guesses[guessPosition.guessRow]
-        
         print("guessing word \(word)")
         if word.count < 5 {
             errorMessage = "Word must contain 5 exactly letters"
@@ -176,9 +191,7 @@ struct ContentView: View {
             }
             
             // your have made a guess and keyboard is the correct colors, now change the guessLabels to the correct colors.
-//            guesses[guessPosition.guessRow].word = word
-//            guesses[guessPosition.guessRow].isComplete = true
-            // move to next row
+//            guessesComplete[guessPosition.guessRow] = true
             guessPosition.add1Word()
             
         }
