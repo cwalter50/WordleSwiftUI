@@ -17,9 +17,10 @@ struct GuessLetterView: View {
     @EnvironmentObject var vm: HomeViewModel
     var body: some View {
         ZStack {
-            GuessLabel(guessPosition: guessPosition, color: Color.clear)
+            GuessLabel(guessPosition: guessPosition, isFrontOfCard: true)
+//            GuessLabel(guessPosition: guessPosition)
                     .rotation3DEffect(Angle(degrees: backDegree), axis: (x: 1, y: 0, z: 0))
-            GuessLabel(guessPosition: guessPosition, color: vm.letterColors.colorDictionary[vm.guessList[guessPosition.guessRow].word[guessPosition.guessColumn]] ?? Color.theme.gray)
+            GuessLabel(guessPosition: guessPosition, isFrontOfCard: false)
                     .rotation3DEffect(Angle(degrees: frontDegree), axis: (x: 1, y: 0, z: 0))
             
             

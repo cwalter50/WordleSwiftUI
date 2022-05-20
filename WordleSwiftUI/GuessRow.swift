@@ -25,9 +25,6 @@ struct GuessRow: View {
 //                Text("Button")
 //            })
             HStack(alignment: .center, spacing: 10) {
-//                ForEach (0..<5) { i in
-//                    GuessLabel(guessPosition: GuessPosition(row: guessRow, column: i), color: Color.clear)
-//                }
                    
                 ForEach(0..<5) {
                     i in
@@ -36,6 +33,10 @@ struct GuessRow: View {
                 
             }
             .frame(minWidth: 0, maxWidth: .infinity)
+            .onChange(of: vm.guessList[guessRow].isComplete, perform: { value in
+                flipCard()
+                
+            })
             
 
         }

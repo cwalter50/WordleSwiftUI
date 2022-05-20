@@ -164,7 +164,7 @@ extension ContentView
             }
             
             // your have made a guess and keyboard is the correct colors, now change the guessLabels to the correct colors.
-            vm.guessList[vm.guessPosition.guessRow].isComplete = true
+            vm.guessList[vm.guessPosition.guessRow].isComplete.toggle()
 //            guessesComplete[guessPosition.guessRow] = true
             vm.guessPosition.add1Word()
             
