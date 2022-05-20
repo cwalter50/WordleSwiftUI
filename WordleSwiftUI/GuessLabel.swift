@@ -9,15 +9,9 @@ import SwiftUI
 
 struct GuessLabel: View {
     
-//    @State var letter: String = "A"
-//    @Binding var letter: String
     @State var guessPosition: GuessPosition = GuessPosition()
     var isFrontOfCard: Bool
-//    @State var color: Color
-//    @Binding var color: Color
-    
-//    @Binding var theColor: Color
-    
+
     @EnvironmentObject var vm: HomeViewModel
     
     var body: some View {
@@ -42,9 +36,6 @@ struct GuessLabel: View {
 
 struct GuessLabel_Previews: PreviewProvider {
     static var previews: some View {
-//        GuessLabel(color: Color.clear)
-//        GuessLabel(color: Color.clear)
-//        GuessLabel(color: .constant(Color.clear))
         GuessLabel(isFrontOfCard: true)
             .environmentObject(dev.homeVM)
     }
