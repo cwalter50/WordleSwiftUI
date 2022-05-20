@@ -34,6 +34,7 @@ struct GuessLabel: View {
             Text(vm.guessList[guessPosition.guessRow].word[guessPosition.guessColumn])
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
+                .foregroundColor(isFrontOfCard ? Color.black : Color.white)
         }
         
     }

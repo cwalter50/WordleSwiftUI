@@ -35,6 +35,8 @@ struct GuessRow: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .onChange(of: vm.guessList[guessRow].isComplete, perform: { value in
                 flipCard()
+                let guess = vm.guessList[guessRow]
+                print("You just guessed \(guess.word): is complete is \(guess.isComplete)")
                 
             })
             
@@ -44,7 +46,7 @@ struct GuessRow: View {
     }
     
     func flipCard () {
-        vm.guessList[guessRow].isComplete = !vm.guessList[guessRow].isComplete
+//        vm.guessList[guessRow].isComplete = !vm.guessList[guessRow].isComplete
         
         if vm.guessList[guessRow].isComplete {
             withAnimation(.linear(duration: durationAndDelay)) {
