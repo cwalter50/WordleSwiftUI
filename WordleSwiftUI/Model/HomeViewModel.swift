@@ -32,7 +32,7 @@ class HomeViewModel: ObservableObject
     {
         if let word = WordList.wordleWords.randomElement() {
             answer = word.uppercased()
-            answer = "BREAD"
+//            answer = "BREAD"
             
         }
     }

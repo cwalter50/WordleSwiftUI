@@ -164,6 +164,12 @@ extension ContentView
             }
             
             // your have made a guess and keyboard is the correct colors, now change the guessLabels to the correct colors.
+            
+            // set ColorArray for guess based off the current colors of the color dictionary.
+            for i in 0..<word.count {
+                vm.guessList[vm.guessPosition.guessRow].colorArray[i] = vm.letterColors.colorDictionary[word[i]] ?? Color.theme.gray
+            }
+            
             vm.guessList[vm.guessPosition.guessRow].isComplete = true
 //            guessesComplete[guessPosition.guessRow] = true
             vm.guessPosition.add1Word()

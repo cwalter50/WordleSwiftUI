@@ -13,6 +13,8 @@ struct GuessRow: View {
     @State var guessRow: Int
     @EnvironmentObject var vm: HomeViewModel
     
+//    @State var colorArray: [Color] = [Color.clear, Color.clear, Color.clear, Color.clear, Color.clear]
+    
     @State var backDegree: Double = 0
     @State var frontDegree: Double = -90
     @State var durationAndDelay: Double = 0.3
@@ -39,10 +41,7 @@ struct GuessRow: View {
                 print("You just guessed \(guess.word): is complete is \(guess.isComplete)")
                 
             })
-            
-
         }
-        
     }
     
     func flipCard () {

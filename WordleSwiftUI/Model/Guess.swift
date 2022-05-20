@@ -12,6 +12,7 @@ struct Guess: Identifiable {
     var word: String
     var isComplete: Bool
     var id = UUID().uuidString
+    var colorArray: [Color] = [Color.theme.gray, Color.theme.gray, Color.theme.gray, Color.theme.gray, Color.theme.gray] // this is needed so that we can update the background colors of the guess, but those colors will not update as the game changes the letterDictionary values change.
 
     init(word: String, isComplete: Bool)
     {

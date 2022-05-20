@@ -18,8 +18,10 @@ struct GuessLabel: View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 10)
+//                .fill(isFrontOfCard ? Color.clear:
+//                    vm.letterColors.colorDictionary[vm.guessList[guessPosition.guessRow].word[guessPosition.guessColumn]] ?? Color.clear)
                 .fill(isFrontOfCard ? Color.clear:
-                    vm.letterColors.colorDictionary[vm.guessList[guessPosition.guessRow].word[guessPosition.guessColumn]] ?? Color.clear)
+                        vm.guessList[guessPosition.guessRow].colorArray[guessPosition.guessColumn])
                 .aspectRatio(1, contentMode: .fit)
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(Color.theme.gray, lineWidth: 3)
