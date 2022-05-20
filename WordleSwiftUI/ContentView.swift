@@ -11,22 +11,17 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var guessPosition = GuessPosition()
-    @State var guesses: [String] = ["","","","","",""]
-    @State var guessesComplete: [Bool] = [false, false, false, false, false, false]
     
-//    @State var guesses: [Guess] = [Guess(), Guess(), Guess(),Guess(), Guess(), Guess()]
-    
-//    @State var guessList = GuessList() // this has 6 guesses in it that are all not completed and starting as ""
-    
-    @State var answer = "BREAD"
+    @StateObject var vm = HomeViewModel() // this contains the guesses, guessPosition, letterColorDictionary, and answer
+
     
     @State private var showErrorAlert = false
     @State private var errorMessage = ""
     
     @State var color = Color.theme.gray
     
-    @StateObject var letterColors = LetterColors()
+    
+//    @StateObject var letterColors = LetterColors()
     
     
     var letterRow1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"]
@@ -38,119 +33,96 @@ struct ContentView: View {
                 Text("WORDLE")
                     .padding()
                     .font(.largeTitle)
-                ForEach(guesses, id: \.self) {
-                    guess in
-                    GuessRow(guess: guess)
-                    
+                ForEach(0..<6) {
+                    i in
+                    GuessRow(guessRow: i)
                 }
-
-
-
-                HStack(alignment: .center, spacing: 5) {
-                    ForEach(letterRow1, id: \.self) {
-                        letter in
-                        
-                        Button (action: {
-                            guessLetter(letter: letter)
-                        }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
-                                .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
-                        })
-                    }
-                    
-                }
-                HStack(alignment: .center, spacing: 5) {
-                    ForEach(letterRow2, id: \.self) {
-                        letter in
-                        Button (action: {
-                            guessLetter(letter: letter)
-                        }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
-                                .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
-                        })
-                    }
-                    
-                }
-                HStack(alignment: .center, spacing: 5) {
-                    Button(action: {
-                        guessWord()
-                    }) {
-                        LetterButton(symbol: "ENTER", theColor: .constant(Color.gray))
-
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-//                    .disabled(guesses[guessPosition.guessRow].count == 5 ? false: true)
-                    
-                    ForEach(letterRow3, id: \.self) {
-                        letter in
-                        Button (action: {
-                            guessLetter(letter: letter)
-                        }, label: {
-                            LetterButton(symbol: letter, theColor: $color)
-                                .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
-                        })
-                            
-                    }
-                    Button(action: {
-                        removeLetter()
-                    }) {
-                        LetterButton(symbol: "DELETE", theColor: .constant(Color.gray))
-                    }
-                    .frame(minWidth: 0, maxWidth: .infinity)
-                }
-                .frame(minWidth: 0, maxWidth: .infinity)
+                keyboardView
             }
             .padding(5)
             .frame(minWidth: 0, maxWidth: .infinity)
             .alert(isPresented: $showErrorAlert) {
                 Alert(title: Text("Error"), message: Text(errorMessage), dismissButton: .cancel())
             }
-            .onAppear(perform: getRandomWord)
-            .environmentObject(letterColors)
+            .environmentObject(vm)
         
     }
     
-    func getRandomWord()
-    {
-        if let word = WordList.wordleWords.randomElement() {
-            answer = word.uppercased()
-            answer = "BREAD"
-            
-        }
-    }
-    
-    
-    func guessLetter(letter: String)
-    {
-        if guesses[guessPosition.guessRow].count < 5
-        {
-            guesses[guessPosition.guessRow] += letter
-            guessPosition.add1Letter()
-        }
-//        if guesses[guessPosition.guessRow].word.count < 5
-//        {
-//            guesses[guessPosition.guessRow].word += letter
-//            guessPosition.add1Letter()
-//        }
-        
-    }
-    
-    func removeLetter()
-    {
-        if guesses[guessPosition.guessRow].count > 0 {
-            guesses[guessPosition.guessRow].removeLast()
-            guessPosition.remove1Letter()
-        }
-//        if guesses[guessPosition.guessRow].word.count > 0 {
-//            guesses[guessPosition.guessRow].word.removeLast()
-//            guessPosition.remove1Letter()
-//        }
 
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .environmentObject(dev.homeVM)
     }
+}
+
+extension ContentView
+{
+    private var keyboardView: some View {
+        VStack {
+            HStack(alignment: .center, spacing: 5) {
+                ForEach(letterRow1, id: \.self) {
+                    letter in
+                    
+                    Button (action: {
+                        vm.addLetter(letter: letter)
+                    }, label: {
+                        LetterButton(symbol: letter, theColor: $color)
+                            .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
+                    })
+                }
+                
+            }
+            HStack(alignment: .center, spacing: 5) {
+                ForEach(letterRow2, id: \.self) {
+                    letter in
+                    Button (action: {
+                        vm.addLetter(letter: letter)
+//
+                    }, label: {
+                        LetterButton(symbol: letter, theColor: $color)
+                            .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
+                    })
+                }
+                
+            }
+            HStack(alignment: .center, spacing: 5) {
+                Button(action: {
+                    guessWord()
+                }) {
+                    LetterButton(symbol: "ENTER", theColor: .constant(Color.gray))
+
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+                
+                ForEach(letterRow3, id: \.self) {
+                    letter in
+                    Button (action: {
+                        vm.addLetter(letter: letter)
+                    }, label: {
+                        LetterButton(symbol: letter, theColor: $color)
+                            .frame(minWidth: 0, maxWidth: (UIScreen.main.bounds.width - 65)/10)
+                    })
+                        
+                }
+                Button(action: {
+                    vm.removeLetter()
+                }) {
+                    LetterButton(symbol: "DELETE", theColor: .constant(Color.gray))
+                }
+                .frame(minWidth: 0, maxWidth: .infinity)
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+        }
+        
+    }
+    
     
     func guessWord()
     {
-        let word = guesses[guessPosition.guessRow]
+        let word = vm.guessList[vm.guessPosition.guessRow].word
         print("guessing word \(word)")
         if word.count < 5 {
             errorMessage = "Word must contain 5 exactly letters"
@@ -166,43 +138,36 @@ struct ContentView: View {
             // Highlight Green First
             for i in 0..<word.count {
                 let guessletter = word[i]
-                if word[i] == answer[i]
+                if word[i] == vm.answer[i]
                 {
-                    letterColors.colorDictionary[guessletter] = Color.theme.green
+                    vm.letterColors.colorDictionary[guessletter] = Color.theme.green
                 }
             }
             
             // Highlight yellow
             for i in 0..<word.count {
                 let guessletter = word[i]
-                if answer.contains(guessletter) && letterColors.colorDictionary[answer[i]] == Color.theme.gray
+                if word[i] != vm.answer[i] && vm.answer.contains(guessletter) && vm.letterColors.colorDictionary[guessletter[i]] != Color.theme.green
+        
                 {
-                    letterColors.colorDictionary[guessletter] = Color.theme.yellow
+                    vm.letterColors.colorDictionary[guessletter] = Color.theme.yellow
                 }
             }
             
             // Highlight darkGray
             for i in 0..<word.count {
                 let guessletter = word[i]
-                if !answer.contains(guessletter)
+                if !vm.answer.contains(guessletter)
                 {
-                    letterColors.colorDictionary[guessletter] = Color.theme.darkGray
+                    vm.letterColors.colorDictionary[guessletter] = Color.theme.darkGray
                 }
             }
             
             // your have made a guess and keyboard is the correct colors, now change the guessLabels to the correct colors.
+            vm.guessList[vm.guessPosition.guessRow].isComplete = true
 //            guessesComplete[guessPosition.guessRow] = true
-            guessPosition.add1Word()
+            vm.guessPosition.add1Word()
             
         }
-    }
-    
-
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-            .environmentObject(dev.letterColors)
     }
 }

@@ -9,41 +9,43 @@ import SwiftUI
 
 struct GuessRow: View {
     
-    @State var guess: String = "BOATS"
-//    @Binding var guess: String
-//    @Binding var guess: Guess
-    @EnvironmentObject var letterColors: LetterColors
+    
+    @State var guessRow: Int
+    @EnvironmentObject var vm: HomeViewModel
     
     @State var backDegree: Double = 0
     @State var frontDegree: Double = -90
     @State var durationAndDelay: Double = 0.3
-    @State var isGuessComplete: Bool = false
-//    @Binding var isGuessComplete: Bool
     
     var body: some View {
         VStack {
-            HStack(alignment: .center, spacing: 10) {
-                GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, letter: guess[0])
-                GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, letter: guess[1])
-                GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, letter: guess[2])
-                GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, letter: guess[3])
-                GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, letter: guess[4])
-            }
-            .frame(minWidth: 0, maxWidth: .infinity)
-            
 //            Button(action: {
 //                flipCard()
 //            }, label: {
 //                Text("Button")
 //            })
+            HStack(alignment: .center, spacing: 10) {
+//                ForEach (0..<5) { i in
+//                    GuessLabel(guessPosition: GuessPosition(row: guessRow, column: i), color: Color.clear)
+//                }
+                   
+                ForEach(0..<5) {
+                    i in
+                        GuessLetterView(backDegree: $backDegree, frontDegree: $frontDegree, guessPosition: GuessPosition(row: guessRow, column: i))
+                }
+                
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            
+
         }
         
     }
     
     func flipCard () {
-//        guess.isComplete = !guess.isComplete
-        isGuessComplete = !isGuessComplete
-        if isGuessComplete {
+        vm.guessList[guessRow].isComplete = !vm.guessList[guessRow].isComplete
+        
+        if vm.guessList[guessRow].isComplete {
             withAnimation(.linear(duration: durationAndDelay)) {
                 backDegree = 90
             }
@@ -63,15 +65,9 @@ struct GuessRow: View {
 
 struct GuessRow_Previews: PreviewProvider {
     static var previews: some View {
-        GuessRow(guess: "BOATS")
-//        GuessRow(guess: .constant("BOATS"))
-//        GuessRow(guess: .constant("BOATS"), isGuessComplete: .constant(false))
-            .environmentObject(dev.letterColors)
-        
-//        GuessRow()
-//            .environmentObject(dev.letterColors)
-        
-//        GuessRow(guess: .constant(Guess(word: "BOATS", isComplete: false)))
-//            .environmentObject(dev.letterColors)
+
+        GuessRow(guessRow: 0)
+            .environmentObject(dev.homeVM)
+
     }
 }

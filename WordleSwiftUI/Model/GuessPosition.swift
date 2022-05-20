@@ -18,6 +18,12 @@ class GuessPosition {
         guessColumn = 0
     }
     
+    init(row: Int, column: Int)
+    {
+        guessRow = row
+        guessColumn = column
+    }
+    
     func add1Letter()
     {
         guessColumn += 1

@@ -13,7 +13,8 @@ struct LetterButton: View {
     @Binding var theColor: Color
 //    @Binding var colorDictionary : [String: Color]
     
-    @EnvironmentObject var letterColors: LetterColors
+//    @EnvironmentObject var letterColors: LetterColors
+    @EnvironmentObject var vm: HomeViewModel
     
 
     
@@ -24,7 +25,7 @@ struct LetterButton: View {
                 .stroke(Color.gray, lineWidth: 3)
 //                .aspectRatio(0.67, contentMode: .fit)
                 .border(Color.secondary, width: 2)
-                .background(letterColors.colorDictionary[symbol] ?? Color.theme.gray)
+                .background(vm.letterColors.colorDictionary[symbol] ?? Color.theme.gray)
             Text(symbol)
                 .foregroundColor(.white)
 
@@ -45,6 +46,6 @@ struct LetterButton_Previews: PreviewProvider {
     static var previews: some View {
 
         LetterButton(theColor: .constant(Color.theme.green))
-            .environmentObject(dev.letterColors)
+            .environmentObject(dev.homeVM)
     }
 }

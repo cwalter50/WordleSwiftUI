@@ -22,7 +22,7 @@ class DeveloperPreview {
     private init() { }
     
     let letterColors = LetterColors()
-//    let homeVM = HomeViewModel()
+    let homeVM = HomeViewModel()
 
     
 //    let stat1 = StatisticModel(title: "Market Cap", value: "$12.5Bn", percentageChange: 25.34)

@@ -9,25 +9,27 @@ import SwiftUI
 
 struct GuessLabel: View {
     
-    @State var letter: String = "A"
+//    @State var letter: String = "A"
+//    @Binding var letter: String
+    @State var guessPosition: GuessPosition = GuessPosition()
     @State var color: Color
+//    @Binding var color: Color
     
 //    @Binding var theColor: Color
     
-    @EnvironmentObject var letterColors: LetterColors
+    @EnvironmentObject var vm: HomeViewModel
     
     var body: some View {
         
         ZStack {
-
-            
             RoundedRectangle(cornerRadius: 10)
                 .fill(color)
                 .aspectRatio(1, contentMode: .fit)
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(Color.theme.gray, lineWidth: 3)
                 .aspectRatio(1, contentMode: .fit)
-            Text(letter.uppercased())
+//            Text(letter.uppercased())
+            Text(vm.guessList[guessPosition.guessRow].word[guessPosition.guessColumn])
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
         }
@@ -37,7 +39,10 @@ struct GuessLabel: View {
 
 struct GuessLabel_Previews: PreviewProvider {
     static var previews: some View {
+//        GuessLabel(color: Color.clear)
         GuessLabel(color: Color.clear)
-            .environmentObject(dev.letterColors)
+//        GuessLabel(color: .constant(Color.clear))
+
+            .environmentObject(dev.homeVM)
     }
 }
